@@ -13,18 +13,20 @@ public class Main {
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
         try {
-            logger.info("**** Reading the maze from file " + args[0]);
-            BufferedReader reader = new BufferedReader(new FileReader(args[0]));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        logger.info("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
-                        logger.info("PASS ");
+            if ("-i".equals(args[0]) || "--input".equals(args[0])) {
+                logger.info("**** Reading the maze from file " + args[1]);
+                BufferedReader reader = new BufferedReader(new FileReader(args[1]));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    for (int idx = 0; idx < line.length(); idx++) {
+                        if (line.charAt(idx) == '#') {
+                            logger.info("WALL ");
+                        } else if (line.charAt(idx) == ' ') {
+                            logger.info("PASS ");
+                        }
                     }
+                    System.out.print(System.lineSeparator());
                 }
-                System.out.print(System.lineSeparator());
             }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
