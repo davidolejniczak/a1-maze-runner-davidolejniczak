@@ -17,7 +17,7 @@ public class Main {
                 logger.info("**** Reading the maze from file " + args[1]);
                 BufferedReader reader = new BufferedReader(new FileReader(args[1]));
                 String line;
-                mazemaker(args[1]);
+                mazeMaker(args[1]);
                 while ((line = reader.readLine()) != null) {
                     for (int idx = 0; idx < line.length(); idx++) {
                         if (line.charAt(idx) == '#') {
@@ -49,25 +49,32 @@ public class Main {
         }
     }
 
-    public static void mazeMaker() {
+    public static void mazeMaker(String filename) {
         //take the input maze and create a matrix that will store the maze so that it can be used in other functions
+        return;
     }
     public static void pathCheck(String userpath){
         //checks if user path will work in maze
         //prints result
+        return;
     }
 
     public static String pathCanonicalMaker(String userpathfactored){
         //converts the users factored path to canonical path that the computer can use to check if its correct
+        String factoredpath = " ";
+        return factoredpath;
     }
 
     public static String pathFinder(String filepath){
         //finds the correct path throw the maze using a right hand strat while recording all moves taken
+        String correctpath = " ";
+        return correctpath;
     }
 
     public static void pathFactorizedPrinter(String solvedpath){
         //takes in the solved path for a maze in canonical form and converts it too factorized form
         //prints result
+        return;
     }
 }
 
