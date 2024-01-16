@@ -32,7 +32,6 @@ public class Main {
             if ("-p".equals(args[2])) {
                 String userpath = pathCanonicalMaker(args[3]);//code to input an factorized path from the command line to canonical
                 pathCheck(userpath); //return if path is correct or not, add extra input that is the maze file or somthing that can repersent it
-
             }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
@@ -61,7 +60,33 @@ public class Main {
 
     public static String pathCanonicalMaker(String userpathfactored){
         //converts the users factored path to canonical path that the computer can use to check if its correct
-        String factoredpath = " ";
+        String factoredpath = "";
+        for (int i=0; i < userpathfactored.length();i++) {
+            char currentChar = userpathfactored.charAt(i);
+            if ("R".equals(currentChar) || "F".equals(currentChar) || "L".equals(currentChar)) {
+                factoredpath = factoredpath + Character.toString(currentChar);
+            }
+            else if (currentChar >= '0' && currentChar <= '9') {
+                int numOfSpace = Integer.parseInt(Character.toString(currentChar));
+                i++;
+                char currentCharNum = userpathfactored.charAt(i);
+                if ("R".equals(currentCharNum)) {
+                    for (int n=0; n<numOfSpace; n++){
+                        factoredpath = factoredpath + Character.toString(currentCharNum);
+                    }
+                }
+                if ("F".equals(currentCharNum)) {
+                    for (int n=0; n<numOfSpace; n++){
+                        factoredpath = factoredpath + Character.toString(currentCharNum);
+                    }
+                }
+                if ("L".equals(currentCharNum)) {
+                    for (int n=0; n<numOfSpace; n++){
+                        factoredpath = factoredpath + Character.toString(currentCharNum);
+                    }
+                }
+            }
+        }
         return factoredpath;
     }
 
