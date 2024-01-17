@@ -3,8 +3,13 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import src.main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
+import src.main.java.ca.mcmaster.se2aa4.mazerunner.Path;
+import src.main.java.ca.mcmaster.se2aa4.mazerunner.Print;
 
 public class Main {
 
@@ -15,23 +20,12 @@ public class Main {
         try {
             if ("-i".equals(args[0]) || "--input".equals(args[0])) {
                 logger.info("**** Reading the maze from file " + args[1]);
-                BufferedReader reader = new BufferedReader(new FileReader(args[1]));
-                String line;
-                mazeMaker(args[1]);
-                while ((line = reader.readLine()) != null) {
-                    for (int idx = 0; idx < line.length(); idx++) {
-                        if (line.charAt(idx) == '#') {
-                            System.out.print("WALL ");
-                        } else if (line.charAt(idx) == ' ') {
-                            System.out.print("PASS ");
-                        }
-                    }
-                    System.out.print(System.lineSeparator());
-                }
+                Maze currentMaze = new Maze();
+                Maze.mazeMaker(args[1]);
             }
             if ("-p".equals(args[2])) {
-                String userpath = pathCanonicalMaker(args[3]);//code to input an factorized path from the command line to canonical
-                pathCheck(userpath); //return if path is correct or not, add extra input that is the maze file or somthing that can repersent it
+                String userpath = Print.pathCanonicalMaker(args[3]);//code to input an factorized path from the command line to canonical
+                Path.pathCheck(userpath); //return if path is correct or not, add extra input that is the maze file or somthing that can repersent it
             }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
@@ -39,67 +33,13 @@ public class Main {
         if (!("-p".equals(args[2]))) {
             logger.info("**** Computing path");
             try {
-                String solvedpath = pathFinder(args[1]);//return path in canonical form
-                pathFactorizedPrinter(solvedpath); //prints path in factorized form
+                String solvedpath = Path.pathFinder(args[1]);//return path in canonical form
+                Print.pathFactorizedPrinter(solvedpath); //prints path in factorized form
             } catch(Exception e) {
                 logger.info("PATH NOT COMPUTED");
             }
             logger.info("** End of MazeRunner");
         }
-    }
-
-    public static void mazeMaker(String filename) {
-        //take the input maze and create a matrix that will store the maze so that it can be used in other functions
-        return;
-    }
-    public static void pathCheck(String userpath){
-        //checks if user path will work in maze
-        //prints result
-        return;
-    }
-
-    public static String pathCanonicalMaker(String userpathfactored){
-        //converts the users factored path to canonical path that the computer can use to check if its correct
-        String factoredpath = "";
-        for (int i=0; i < userpathfactored.length();i++) {
-            char currentChar = userpathfactored.charAt(i);
-            if ("R".equals(currentChar) || "F".equals(currentChar) || "L".equals(currentChar)) {
-                factoredpath = factoredpath + Character.toString(currentChar);
-            }
-            else if (currentChar >= '0' && currentChar <= '9') {
-                int numOfSpace = Integer.parseInt(Character.toString(currentChar));
-                i++;
-                char currentCharNum = userpathfactored.charAt(i);
-                if ("R".equals(currentCharNum)) {
-                    for (int n=0; n<numOfSpace; n++){
-                        factoredpath = factoredpath + Character.toString(currentCharNum);
-                    }
-                }
-                if ("F".equals(currentCharNum)) {
-                    for (int n=0; n<numOfSpace; n++){
-                        factoredpath = factoredpath + Character.toString(currentCharNum);
-                    }
-                }
-                if ("L".equals(currentCharNum)) {
-                    for (int n=0; n<numOfSpace; n++){
-                        factoredpath = factoredpath + Character.toString(currentCharNum);
-                    }
-                }
-            }
-        }
-        return factoredpath;
-    }
-
-    public static String pathFinder(String filepath){
-        //finds the correct path throw the maze using a right hand strat while recording all moves taken
-        String correctpath = " ";
-        return correctpath;
-    }
-
-    public static void pathFactorizedPrinter(String solvedpath){
-        //takes in the solved path for a maze in canonical form and converts it too factorized form
-        //prints result
-        return;
     }
 }
 
