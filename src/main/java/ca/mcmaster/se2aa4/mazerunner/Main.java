@@ -35,7 +35,7 @@ public class Main {
             if (!("-p".equals(args[2]))) {
                 logger.info("**** Computing path");
                 String solvedpath = Path.pathFinder(args[1]);//return path in canonical form
-                Print.pathFactorizedPrinter(solvedpath); //prints path in factorized form
+                Print.pathFactorized(solvedpath); //prints path in factorized form
             }
         } catch (Exception e) {
                 logger.info("PATH NOT COMPUTED");
