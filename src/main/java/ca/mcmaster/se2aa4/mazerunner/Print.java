@@ -33,7 +33,7 @@ public class Print {
         return factoredPath.toString();
     }
 
-    public static void pathFactorized(String solvedpath) {
+    public static String pathFactorized(String solvedpath) {
         //takes in the solved path for a maze in canonical form and converts it too factorized form
         StringBuilder factoredPath = new StringBuilder();
         for (int i = 0; i < solvedpath.length(); i++) {
@@ -51,6 +51,10 @@ public class Print {
             }
             factoredPath.append(" ");
         }
-        System.out.println(factoredPath);
+        return factoredPath.toString();
+    }
+
+    public static void printPath(String solvedPath) {
+        System.out.println(solvedPath);
     }
 }
