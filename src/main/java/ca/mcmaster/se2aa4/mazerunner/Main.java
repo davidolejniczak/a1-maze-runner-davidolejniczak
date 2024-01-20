@@ -29,18 +29,19 @@ public class Main {
             }
             throw new ArrayIndexOutOfBoundsException();
         } catch (ArrayIndexOutOfBoundsException e) {
-            logger.error("/!\\ No -p args /!\\");
+            logger.error("No path given\nSolving Maze");
         }
         try {
             if (!("-p".equals(args[2]))) {
                 logger.info("**** Computing path");
-                String solvedpath = Path.pathFinder(args[1]);//return path in canonical form
-                Print.pathFactorized(solvedpath); //prints path in factorized form
+                String solvedPath = Path.pathFinder(args[1]);//return path in canonical form
+                solvedPath = Print.pathFactorized(solvedPath);
+                Print.printPath(solvedPath); //prints path in factorized form
             }
         } catch (Exception e) {
                 logger.info("PATH NOT COMPUTED");
             }
-            logger.info("** End of MazeRunner");
-        }
+        logger.info("** End of MazeRunner");
+    }
 }
 
