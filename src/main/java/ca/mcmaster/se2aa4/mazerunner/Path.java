@@ -9,7 +9,6 @@ public class Path {
 
     public static String pathFinder(String filepath){
         //finds the correct path throw the maze using a right hand strat while recording all moves taken
-        String correctpath = "FF";
-        return correctpath;
+        return "FF";
     }
 }
