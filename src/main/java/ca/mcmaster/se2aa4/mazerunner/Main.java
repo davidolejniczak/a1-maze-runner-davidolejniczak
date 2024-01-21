@@ -18,14 +18,15 @@ public class Main {
             try {
                 Maze.mazeMaker(args[1]);
             } catch (IOException e) {
-                logger.error("Wrong maze file name");
-                System.exit(1);
+                logger.error("Wrong maze file name\n");
+                logger.error("Program will not produce a correct output");
             }
         }
         try {
             if ("-p".equals(args[2])) {
-                String userpath = Print.pathCanonicalMaker(args[3]);//code to input an factorized path from the command line to canonical
-                Path.pathCheck(userpath); //return if path is correct or not, add extra input that is the maze file or somthing that can repersent it
+                String userPath = Print.pathCanonicalMaker(args[3]);
+                boolean result = Path.pathCheck(userPath);
+                Print.pathResult(result);
             }
             throw new ArrayIndexOutOfBoundsException();
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -34,9 +35,9 @@ public class Main {
         try {
             if (!("-p".equals(args[2]))) {
                 logger.info("**** Computing path");
-                String solvedPath = Path.pathFinder(args[1]);//return path in canonical form
+                String solvedPath = Path.pathFinder(args[1]);
                 solvedPath = Print.pathFactorized(solvedPath);
-                Print.printPath(solvedPath); //prints path in factorized form
+                Print.printPath(solvedPath);
             }
         } catch (Exception e) {
                 logger.info("PATH NOT COMPUTED");
