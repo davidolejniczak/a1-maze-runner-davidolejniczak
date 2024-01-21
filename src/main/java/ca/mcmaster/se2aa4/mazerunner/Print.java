@@ -1,6 +1,10 @@
 package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 
 public class Print {
+
+    private static char currentChar;
+    private static char currentCharWithIndex;
+
     public static String pathCanonicalMaker(String userpathfactored){
         //converts the users factored path to canonical path that the computer can use to check if its correct
         StringBuilder factoredPath = new StringBuilder(" ");
@@ -36,19 +40,32 @@ public class Print {
     public static String pathFactorized(String solvedpath) {
         //takes in the solved path for a maze in canonical form and converts it too factorized form
         StringBuilder factoredPath = new StringBuilder();
-        for (int index = 0;  index< solvedpath.length(); index++) {
-            char currentChar = solvedpath.charAt(index);
-            if (currentChar == solvedpath.charAt(index+1) && index < solvedpath.length()-1) {
-                int numOfTimes = 1;
-                while (currentChar == solvedpath.charAt(index+numOfTimes)) {
-                    numOfTimes++;
+        factoredPath.append("");
+        for (int index = 0;  index < solvedpath.length(); index++) {
+            try {
+                currentChar = solvedpath.charAt(index);
+                currentCharWithIndex = solvedpath.charAt(index + 1);
+            } catch (IndexOutOfBoundsException e){}
+            int numOfTimes = 1;
+            int solvedPathLength = solvedpath.length()-1;
+            if (index < solvedPathLength && currentChar == currentCharWithIndex) {
+                char aheadChars = solvedpath.charAt(index+numOfTimes);
+                while (currentChar == aheadChars) {
+                    numOfTimes++; index++;
+                    try {
+                        aheadChars = solvedpath.charAt(index + numOfTimes);
+                    } catch (IndexOutOfBoundsException e) {// out of index error if double is last thing in string
+                        break;
+                    }
                 }
-                factoredPath.append(numOfTimes);
+                String numOfTimesString = Integer.toString(numOfTimes);
+                factoredPath.append(numOfTimesString);
                 factoredPath.append(currentChar);
-            }
+                }
             else {
                 factoredPath.append(currentChar);
             }
+
             factoredPath.append(" ");
         }
         return factoredPath.toString();
@@ -63,4 +80,6 @@ public class Print {
         if (result) {System.out.println("Correct Path");return;}
         System.out.println("Incorrect Path");
     }
+
+
 }

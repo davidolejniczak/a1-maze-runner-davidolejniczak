@@ -13,6 +13,7 @@ public class Main {
     private static final Logger logger = LogManager.getLogger();
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
+        int argsP = 0;
         if ("-i".equals(args[0]) || "--input".equals(args[0])) {
             logger.info("**** Reading the maze from file " + args[1]);
             try {
@@ -23,24 +24,25 @@ public class Main {
             }
         }
         try {
+
             if ("-p".equals(args[2])) {
                 String userPath = Print.pathCanonicalMaker(args[3]);
                 boolean result = Path.pathCheck(userPath);
                 Print.pathResult(result);
             }
-            throw new ArrayIndexOutOfBoundsException();
         } catch (ArrayIndexOutOfBoundsException e) {
-            logger.error("No path given\nSolving Maze");
+            logger.info("No path given");
+            argsP = 1;
         }
         try {
-            if (!("-p".equals(args[2]))) {
+            if (argsP == 1) {
                 logger.info("**** Computing path");
                 String solvedPath = Path.pathFinder(args[1]);
                 solvedPath = Print.pathFactorized(solvedPath);
                 Print.printPath(solvedPath);
             }
         } catch (Exception e) {
-                logger.info("PATH NOT COMPUTED");
+                logger.error("PATH NOT COMPUTED");
             }
         logger.info("** End of MazeRunner");
     }
