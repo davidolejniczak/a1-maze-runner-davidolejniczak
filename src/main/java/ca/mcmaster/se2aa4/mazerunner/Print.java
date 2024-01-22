@@ -36,9 +36,35 @@ public class Print {
     }
 
     public static String pathFactorized(String solvedpath) {
-        //takes in the solved path for a maze in canonical form and converts it too factorized form
         StringBuilder factoredPath = new StringBuilder();
         factoredPath.append("");
+        for (int index = 0;  index < solvedpath.length(); index++) {
+            try {
+                currentChar = solvedpath.charAt(index);
+                currentCharWithIndex = solvedpath.charAt(index + 1);
+            } catch (IndexOutOfBoundsException e){}
+            int numOfTimes = 1;
+            int solvedPathLength = solvedpath.length()-1;
+            if (index < solvedPathLength && currentChar == currentCharWithIndex) {
+                char aheadChars = solvedpath.charAt(index+numOfTimes);
+                while (currentChar == aheadChars) {
+                    numOfTimes++; index++;
+                    try {
+                        aheadChars = solvedpath.charAt(index + numOfTimes);
+                    } catch (IndexOutOfBoundsException e) {// out of index error if double is last thing in string
+                        break;
+                    }
+                }
+                String numOfTimesString = Integer.toString(numOfTimes);
+                factoredPath.append(numOfTimesString);
+                factoredPath.append(currentChar);
+            }
+            else {
+                factoredPath.append(currentChar);
+            }
+
+            factoredPath.append(" ");
+        }
         return factoredPath.toString();
     }
 
