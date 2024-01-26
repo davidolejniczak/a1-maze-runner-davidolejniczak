@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Maze {
+    public static int rowLocation;
+    public static int colnLocation;
     static int westEntryRow;
     static int eastEntryRow;
     public static int[][] mazeStorage;
@@ -35,6 +37,17 @@ public class Maze {
             if (mazeStorage[rowCount][linePrintLoop.length()-1] == 0) {eastEntryRow = rowCount;}
             rowCount++;
         }
+    }
+    private static void mazeStartWest(){
+       rowLocation = westEntryRow;
+       colnLocation = 0;
+    }
+    private static void mazeStartEast(){
+        rowLocation = eastEntryRow;
+        colnLocation = mazeStorage[0].length;
+    }
+    public static void mazeSideDecider(){
+        
     }
 }
 

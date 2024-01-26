@@ -3,7 +3,19 @@ package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 public class Path {
 
     public static boolean pathCheck(String userpath){
-
+        char currentChar;
+        int charCount = 0;
+        while (charCount < userpath.length()) {
+            currentChar = userpath.charAt(charCount);
+            if (currentChar == 'F') {
+                if (!fowardMove(Maze.rowLocation, Maze.colnLocation)) {return false;}
+            } else if (currentChar == 'L') {
+                if (!leftMove(Maze.rowLocation, Maze.colnLocation)) {return false;}
+            } else if (currentChar == 'R') {
+                if (!rightMove(Maze.rowLocation, Maze.colnLocation)) {return false;}
+            }
+            charCount++;
+        }
         return false;
     }
 
@@ -14,7 +26,7 @@ public class Path {
 
     private static boolean rightMove(int row, int colm) {
         if (rightCheck(row, colm)) {
-            Maze.mazeStorage[row][colm] = Maze.mazeStorage[row][colm+1];
+            Maze.colnLocation = Maze.colnLocation + 1;
             Compass.compassRight();
             return true;
         }
@@ -22,7 +34,7 @@ public class Path {
     }
     private static boolean leftMove(int row, int colm) {
         if (leftCheck(row, colm)) {
-            Maze.mazeStorage[row][colm] = Maze.mazeStorage[row][colm-1];
+            Maze.colnLocation = Maze.colnLocation - 1;
             Compass.compassLeft();
             return true;
         }
@@ -31,7 +43,7 @@ public class Path {
 
     private static boolean fowardMove(int row, int colm) {
         if (fowardCheck(row, colm)) {
-            Maze.mazeStorage[row][colm] = Maze.mazeStorage[row+1][colm];
+            Maze.rowLocation = Maze.rowLocation + 1;
             return true;
         }
         return false;
