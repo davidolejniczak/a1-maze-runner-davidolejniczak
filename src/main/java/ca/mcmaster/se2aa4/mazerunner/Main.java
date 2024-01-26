@@ -24,7 +24,6 @@ public class Main {
             }
         }
         try {
-
             if ("-p".equals(args[2])) {
                 String userPath = Print.pathCanonicalMaker(args[3]); //see of user inputing a canonical path works as well
                 boolean result = Path.pathCheck(userPath);

@@ -39,22 +39,22 @@ public class Print {
         StringBuilder factoredPath = new StringBuilder();
         factoredPath.append("");
         for (int index = 0;  index < solvedpath.length(); index++) {
+            int numOfTimes = 1;
             try {
                 currentChar = solvedpath.charAt(index);
                 currentCharWithIndex = solvedpath.charAt(index + 1);
-            } catch (IndexOutOfBoundsException e){}
-            int numOfTimes = 1;
-            int solvedPathLength = solvedpath.length()-1;
-            if (index < solvedPathLength && currentChar == currentCharWithIndex) {
+            } catch (IndexOutOfBoundsException e){}//out of index error for last char in string
+            if (index < solvedpath.length()-1 && currentChar == currentCharWithIndex) {
                 char aheadChars = solvedpath.charAt(index+numOfTimes);
                 while (currentChar == aheadChars) {
                     numOfTimes++; index++;
                     try {
-                        aheadChars = solvedpath.charAt(index + numOfTimes);
-                    } catch (IndexOutOfBoundsException e) {// out of index error if double is last thing in string
+                        aheadChars = solvedpath.charAt(index+numOfTimes);
+                    } catch (IndexOutOfBoundsException e) {//out of index error if double is last thing in string
                         break;
                     }
                 }
+                if (numOfTimes >= 2) {index++;numOfTimes++;}//to account for the last match
                 String numOfTimesString = Integer.toString(numOfTimes);
                 factoredPath.append(numOfTimesString);
                 factoredPath.append(currentChar);
@@ -62,7 +62,6 @@ public class Print {
             else {
                 factoredPath.append(currentChar);
             }
-
             factoredPath.append(" ");
         }
         return factoredPath.toString();

@@ -12,27 +12,27 @@ public class Maze {
         int mazeRows = 0,mazeColn = 0;
         while ((lineCountLoop = readerCount.readLine()) != null) {
             mazeRows =  lineCountLoop.length();
-            for (int index = 0; index < lineCountLoop.length(); index++) {
+            for (int index = 0; index <= lineCountLoop.length(); index++) {
                 mazeColn = index;
             }
         }
-        int[][] mazeStorage = new int[mazeRows][mazeColn+1];
+        int[][] mazeStorage = new int[mazeRows][mazeColn];
         BufferedReader readerPrint = new BufferedReader(new FileReader(filename));
         String linePrintLoop;
         int rowCount = 0;
         while ((linePrintLoop = readerPrint.readLine()) != null) {
             for (int index = 0; index < linePrintLoop.length(); index++) {
                 if (linePrintLoop.charAt(index) == '#') {
+                    //System.out.print("WALL ");
                     mazeStorage[rowCount][index] = 1;
                 } else if (linePrintLoop.charAt(index) == ' ') {
+                    //System.out.print("Pass ");
                     mazeStorage[rowCount][index] = 0;
-                    if (mazeStorage[rowCount][0] == 0) {westEntryRow = rowCount;}
-                    if (mazeStorage[rowCount][mazeColn+1] == 0) {eastEntryRow = rowCount;}
                 }
             }
+            if (mazeStorage[rowCount][0] == 0) {westEntryRow = rowCount;}
+            if (mazeStorage[rowCount][linePrintLoop.length()-1] == 0) {eastEntryRow = rowCount;}
             rowCount++;
-            System.out.print(westEntryRow);
-            System.out.println(eastEntryRow);
         }
     }
 }
