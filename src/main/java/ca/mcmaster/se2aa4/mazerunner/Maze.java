@@ -4,8 +4,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Maze {
-    public static int westEntryRow;
-    public static int eastEntryRow;
+    static int westEntryRow;
+    static int eastEntryRow;
+    public static int[][] mazeStorage;
     public static void mazeMaker(String filename) throws IOException {
         BufferedReader readerCount = new BufferedReader(new FileReader(filename));
         String lineCountLoop;
@@ -16,7 +17,7 @@ public class Maze {
                 mazeColn = index;
             }
         }
-        int[][] mazeStorage = new int[mazeRows][mazeColn];
+        mazeStorage = new int[mazeRows][mazeColn];
         BufferedReader readerPrint = new BufferedReader(new FileReader(filename));
         String linePrintLoop;
         int rowCount = 0;
