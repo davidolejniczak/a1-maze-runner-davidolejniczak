@@ -23,11 +23,14 @@ public class Main {
                 logger.error("Program will not produce a correct output");
             }
         }
+       // String userPPPath = "FLFRFFLFFFFFFRFFFFRFFLFFRFFLF"; //error in args inputting arguments
+       // boolean tt = Path.userCheck(userPPPath);
+       // Print.pathResult(tt);
         try {
-
             if ("-p".equals(args[2])) {
-                String userPath = Print.pathCanonicalMaker(args[3]); //see of user inputing a canonical path works as well
-                boolean result = Path.pathCheck(userPath);
+                String userPath; //Print.pathCanonicalMaker(args[3]); //see of user inputing a canonical path works as well
+                userPath = "FRFFLFFRFFLFFFFLFFFFFFRFFLFRF"; //error in args inputting arguments
+                boolean result = Path.userCheck(userPath);
                 Print.pathResult(result);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
