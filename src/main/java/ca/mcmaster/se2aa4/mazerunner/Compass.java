@@ -2,7 +2,7 @@ package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 
 public class Compass {
     public static char directionFaced;
-    private static void compassLeft(){
+    protected static void compassLeft(){
         if (directionFaced == 'N') {
             directionFaced =  'W';
         } else if (directionFaced == 'W') {
@@ -13,7 +13,7 @@ public class Compass {
             directionFaced = 'N';
         }
     }
-    private static void compassRight(){
+    protected static void compassRight(){
         if (directionFaced == 'N') {
             directionFaced =  'E';
         } else if (directionFaced == 'W') {

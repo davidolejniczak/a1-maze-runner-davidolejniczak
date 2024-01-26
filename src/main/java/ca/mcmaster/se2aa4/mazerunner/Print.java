@@ -66,17 +66,12 @@ public class Print {
         }
         return factoredPath.toString();
     }
-
-
     public static void printPath(String solvedPath) {
         System.out.println("Starting from the west side of the maze");
         System.out.println(solvedPath);
     }
-
     public static void pathResult(boolean result) {
         if (result) {System.out.println("Correct Path");return;}
         System.out.println("Incorrect Path");
     }
-
-
 }
