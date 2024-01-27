@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import src.main.java.ca.mcmaster.se2aa4.mazerunner.Explorer;
 import src.main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
 import src.main.java.ca.mcmaster.se2aa4.mazerunner.Path;
 import src.main.java.ca.mcmaster.se2aa4.mazerunner.Print;
@@ -29,7 +30,7 @@ public class Main {
         try {
             if ("-p".equals(args[2])) {
                 String userPath; //Print.pathCanonicalMaker(args[3]); //see of user inputing a canonical path works as well
-                userPath = "FRFFLFFRFFLFFFFLFFFFFFRFFLFRF"; //error in args inputting arguments
+                userPath = "FFFFFLLFFRFFRFFLLFFRFFRFFF"; //error in args inputting arguments     FRFFLFFRFFLFFFFLFFFFFFRFFLFRF
                 boolean result = Path.userCheck(userPath);
                 Print.pathResult(result);
             }
@@ -40,7 +41,7 @@ public class Main {
         try {
             if (argsP == 1) {
                 logger.info("**** Computing path");
-                String solvedPath = Path.pathFinder(args[1]);
+                String solvedPath = Explorer.pathFinder(args[1]);
                 solvedPath = Print.pathFactorized(solvedPath);
                 Print.printPath(solvedPath);
             }

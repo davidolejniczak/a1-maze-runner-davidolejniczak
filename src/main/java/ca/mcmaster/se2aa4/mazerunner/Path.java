@@ -6,14 +6,14 @@ public class Path {
         try {
             Maze.mazeStartWest();
             if (pathCheck(currentPath)) {
-                System.out.println("WEST PATH WORKS");
+                System.out.println("Starting on the West side ");
                 return true;
             }
             Maze.mazeStartEast();
             //printLoc();
             //System.out.println("PRINT LOC 1");
             if (pathCheck(currentPath)) {
-                System.out.println("EAST PATH WORKS");
+                System.out.println("Starting on the East side ");
                 return true;
             }
         } catch (Exception e) {System.out.println("Given is incorrect by having too many moves");}
@@ -21,6 +21,7 @@ public class Path {
     }
     private static boolean pathCheck(String userpath) {
         //System.out.println(userpath + "STRING BEING READ");
+        // re do this so that osmeone can spin around in one spot and it wont die on them
         char currentChar;
         int charCount = 0;
         while (charCount < userpath.length()) {
@@ -42,7 +43,7 @@ public class Path {
                 //System.out.println("RIGHT HAND TURN");
                 rightMove();
             }
-            charCount++;
+            charCount++;  
             //PrintLoc();
             //System.out.println("printloc 2");
         }
@@ -57,14 +58,10 @@ public class Path {
         System.out.println(Maze.colnLocation);
     }
 
-    public static boolean endCondition(){
+    private static boolean endCondition(){
         if (Maze.rowLocation == Maze.eastEntry[0] && Maze.colnLocation == Maze.eastEntry[1]) {return true;}
         if (Maze.rowLocation == Maze.westEntry[0] && Maze.colnLocation == Maze.westEntry[1]) {return true;}
         return false;
-    }
-    public static String pathFinder(String filepath){
-        //finds the correct path throw the maze using a right hand strat while recording all moves taken
-        return "RFFFFRLFFF";
     }
     private static void rightMove() {
             //System.out.println(Compass.directionFaced + " DIRECTINON FACED 1 ");
@@ -90,13 +87,14 @@ public class Path {
                 Maze.colnLocation = Maze.colnLocation + 1;
             }
             //System.out.println("FOWARD MOVE GOOD 2.2");
+            //Maze.updateLocation();
             return true;
         }
         //System.out.println("ERROR 2");
         return false;
     }
 
-    private static boolean fowardCheck(int row, int colm, char compass) {
+    static boolean fowardCheck(int row, int colm, char compass) {
         if (compass == 'N') {
             if (Maze.mazeStorage[row-1][colm] == 0) {return true;}
         }

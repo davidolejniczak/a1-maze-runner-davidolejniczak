@@ -5,7 +5,7 @@ public class Print {
     private static char currentCharWithIndex;
 
     public static String pathCanonicalMaker(String userpathfactored){
-        StringBuilder factoredPath = new StringBuilder(" ");
+        StringBuilder factoredPath = new StringBuilder("");
         for (int index=0; index < userpathfactored.length();index++) {
             char currentChar = userpathfactored.charAt(index);
             if ("R".equals(currentChar) || "F".equals(currentChar) || "L".equals(currentChar)) {
@@ -35,7 +35,7 @@ public class Print {
         return factoredPath.toString();
     }
 
-    public static String pathFactorized(String solvedpath) {
+    public static String pathFactorized(String solvedpath) {//errors here
         StringBuilder factoredPath = new StringBuilder();
         factoredPath.append("");
         for (int index = 0;  index < solvedpath.length(); index++) {

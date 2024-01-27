@@ -7,7 +7,7 @@ import java.io.Serial;
 public class Maze {
     public static int rowLocation;
     public static int colnLocation;
-    public static int currentLocation[] = new int[2]; // maybe delete if not used anywhere
+    //public static int currentLocation[] = new int[2]; // maybe delete if not used anywhere
     static int westEntry[] = new int[2];
     static int eastEntry[] = new int[2];
     public static int[][] mazeStorage;
@@ -60,21 +60,26 @@ public class Maze {
     public static void mazeStartWest(){
        endFinder();
        rowLocation = westEntry[0];
-       currentLocation[0] = westEntry[0];
+       //currentLocation[0] = westEntry[0];
        colnLocation = 0;
-       currentLocation[1] = 0;
+       //currentLocation[1] = 0;
        Compass.directionFaced = 'E';
        //System.out.println(rowLocation);
        //System.out.println(colnLocation);
-       //.out.print(westEntry[0]); System.out.print(westEntry[1]); System.out.println("WEST ENTRY");
+       //System.out.print(westEntry[0]); System.out.print(westEntry[1]); System.out.println("WEST ENTRY");
        //System.out.print(eastEntry[0]); System.out.print(eastEntry[1]); System.out.println("EAST ENTRY");
     }
     public static void mazeStartEast(){
         rowLocation = eastEntry[0];
-        currentLocation[0] = eastEntry[0];
+        //currentLocation[0] = eastEntry[0];
         colnLocation = eastEntry[1];
-        currentLocation[1] = eastEntry[1];
+        //currentLocation[1] = eastEntry[1];
         Compass.directionFaced = 'W';
     }
+
+   //public static void updateLocation() {
+        //currentLocation[0] = rowLocation;
+        //currentLocation[1] = colnLocation;
+//
 }
 
