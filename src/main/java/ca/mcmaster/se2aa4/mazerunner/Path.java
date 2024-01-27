@@ -16,12 +16,13 @@ public class Path {
                 System.out.println("Starting on the East side ");
                 return true;
             }
-        } catch (Exception e) {System.out.println("Given is incorrect by having too many moves");}
+        } catch (Exception e) {System.out.println("Given path is incorrect by having too many moves");}
         return false;
     }
     private static boolean pathCheck(String userpath) {
         //System.out.println(userpath + "STRING BEING READ");
         // re do this so that osmeone can spin around in one spot and it wont die on them
+        // so it doesn't crash when someone just hits a wall
         char currentChar;
         int charCount = 0;
         while (charCount < userpath.length()) {

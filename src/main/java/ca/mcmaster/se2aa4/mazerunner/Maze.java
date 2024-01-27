@@ -35,25 +35,31 @@ public class Maze {
             }
             rowCount++;
         }
-        //for (int i = 0; i < mazeStorage.length; i++) {
-        //            for (int j = 0; j < mazeStorage[i].length; j++) {
-        //                System.out.print(mazeStorage[i][j]);
-        //            }
-        //            System.out.println();
-        //}
+        for (int i = 0; i < mazeStorage.length; i++) {
+                    for (int j = 0; j < mazeStorage[i].length; j++) {
+                        System.out.print(mazeStorage[i][j]);
+                    }
+                    System.out.println();
+        }
     }
     private static void endFinder(){
         //int numOfColns = mazeStorage[0].length-1;
         //System.out.println("NUM OF COLMS IN MAZE" + numOfColns);
         for (int i = 0; i < mazeStorage.length; i++) {
-            if (mazeStorage[i][0] == 0) {
-                westEntry[0] = i;
-                westEntry[1] = 0;
-            }
-            if (mazeStorage[i][mazeStorage[i].length-1] == 0) {
+            if (mazeStorage[i][0] == 0 && i+2>mazeStorage.length) // acounting for wired error where extra line of 0 shows up
+            {
+                break;
+            }else if (mazeStorage[i][mazeStorage[i].length-1] == 0) {
                 eastEntry[0] = i;
                 eastEntry[1] = mazeStorage[i].length-1;
                 //System.out.println(eastEntry[1]+ " MAZE ENDFINER ");
+            }
+            if (mazeStorage[i][0] == 0 && i+2>mazeStorage.length) // acounting for wired error where extra line of 0 shows up
+                {
+                break;
+            }else if (mazeStorage[i][0] == 0) {
+                    westEntry[0] = i;
+                    westEntry[1] = 0;
             }
         }
     }

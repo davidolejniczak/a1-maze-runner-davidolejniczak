@@ -7,29 +7,48 @@ public class Explorer {
         System.out.println("Starting from West side of Maze");
         Maze.mazeStartWest();
         while (Maze.rowLocation != Maze.eastEntry[0] || Maze.colnLocation != Maze.eastEntry[1]) {
+            try {
+            System.out.println("top of while" + pathWay);
             if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced)) {
                 //open foward space only case
                 moveSpaceFoward();
                 pathWay.append("F");
-            }
-            if (rightCheck(Maze.rowLocation, Maze.colnLocation)) {
+            }if (rightCheck(Maze.rowLocation, Maze.colnLocation)) {
                 //open right path case
                 Compass.compassRightMove();
                 pathWay.append("R");
-            } else if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced) == false && rightCheck(Maze.rowLocation, Maze.colnLocation) == false){
+            }if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced) == false && rightCheck(Maze.rowLocation, Maze.colnLocation) == false){
                 //foward and right wall blocked move
                 Compass.compassLeftMove();
                 pathWay.append("L");
-            } else {
+            }if (deadEndCase()){
                 //dead end case
                 Compass.compassLeftMove();
                 pathWay.append("L");
                 Compass.compassLeftMove();
                 pathWay.append("L");
             }
-            System.out.println(pathWay);
+            } catch (Exception e) {
+                break;
+            }
+            System.out.println(pathWay + " While end");
+            //System.out.print(Maze.rowLocation);
+            //System.out.println(Maze.colnLocation);
         }
+        //System.out.println("Error 1");
+        //pathWay.append("F");
         return pathWay.toString();
+    }
+
+    private static boolean deadEndCase(){
+        if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced) == false){
+            if (rightCheck(Maze.rowLocation, Maze.colnLocation) == false) {
+                if (leftCheck(Maze.rowLocation, Maze.colnLocation) == false) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static boolean rightCheck(int row, int colm){
@@ -44,12 +63,27 @@ public class Explorer {
         }
         if (Compass.directionFaced == 'E') {
             if (Maze.mazeStorage[row+1][colm] == 0) {
-                //System.out.println("right CHECK GOOD");
                 return true;}
         }
-        //System.out.println("right CHECK BAD");
         return false;
         }
+
+    private static boolean leftCheck(int row, int colm){
+        if (Compass.directionFaced == 'N') {
+            if (Maze.mazeStorage[row][colm-1] == 0) {return true;}
+        }
+        if (Compass.directionFaced == 'W') {
+            if (Maze.mazeStorage[row+1][colm] == 0) {return true;}
+        }
+        if (Compass.directionFaced == 'S') {
+            if (Maze.mazeStorage[row][colm+1] == 0) {return true;}
+        }
+        if (Compass.directionFaced == 'E') {
+            if (Maze.mazeStorage[row-1][colm] == 0) {
+                return true;}
+        }
+        return false;
+    }
 
     private static void moveSpaceFoward(){
         if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced)) {

@@ -2,7 +2,7 @@ package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 
 public class Print {
     private static char currentChar;
-    private static char currentCharWithIndex;
+    private static char nextChar;
 
     public static String pathCanonicalMaker(String userpathfactored){
         StringBuilder factoredPath = new StringBuilder("");
@@ -35,34 +35,28 @@ public class Print {
         return factoredPath.toString();
     }
 
-    public static String pathFactorized(String solvedpath) {//errors here
+    public static String pathFactorized(String solvedpath) {//errors here // straight path doesn't work // last f is being cut off
         StringBuilder factoredPath = new StringBuilder();
-        factoredPath.append("");
+        int numOfTimes = 1;
         for (int index = 0;  index < solvedpath.length(); index++) {
-            int numOfTimes = 1;
             try {
                 currentChar = solvedpath.charAt(index);
-                currentCharWithIndex = solvedpath.charAt(index + 1);
-            } catch (IndexOutOfBoundsException e){}//out of index error for last char in string
-            if (index < solvedpath.length()-1 && currentChar == currentCharWithIndex) {
-                char aheadChars = solvedpath.charAt(index+numOfTimes);
-                while (currentChar == aheadChars) {
-                    numOfTimes++; index++;
-                    try {
-                        aheadChars = solvedpath.charAt(index+numOfTimes);
-                    } catch (IndexOutOfBoundsException e) {//out of index error if double is last thing in string
-                        break;
-                    }
+                nextChar = solvedpath.charAt(index + 1);
+            } catch (IndexOutOfBoundsException e) {
+                nextChar = 'N';
+            }//out of index error for last char in string
+            if (currentChar == nextChar) {
+                numOfTimes++;
+            }
+            else  {
+                if (numOfTimes >= 2) {
+                    factoredPath.append(numOfTimes);
                 }
-                if (numOfTimes >= 2) {index++;numOfTimes++;}//to account for the last match
-                String numOfTimesString = Integer.toString(numOfTimes);
-                factoredPath.append(numOfTimesString);
                 factoredPath.append(currentChar);
+                factoredPath.append(" ");
+                numOfTimes = 1;
             }
-            else {
-                factoredPath.append(currentChar);
-            }
-            factoredPath.append(" ");
+            currentChar = nextChar;
         }
         return factoredPath.toString();
     }
