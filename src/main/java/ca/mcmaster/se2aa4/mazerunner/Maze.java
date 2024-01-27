@@ -35,12 +35,12 @@ public class Maze {
             }
             rowCount++;
         }
-        for (int i = 0; i < mazeStorage.length; i++) {
-                    for (int j = 0; j < mazeStorage[i].length; j++) {
-                        System.out.print(mazeStorage[i][j]);
-                    }
-                    System.out.println();
-        }
+        //for (int i = 0; i < mazeStorage.length; i++) {
+        //            for (int j = 0; j < mazeStorage[i].length; j++) {
+        //                System.out.print(mazeStorage[i][j]);
+        //            }
+        //            System.out.println();
+        //}
     }
     private static void endFinder(){
         //int numOfColns = mazeStorage[0].length-1;

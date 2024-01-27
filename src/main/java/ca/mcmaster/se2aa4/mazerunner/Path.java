@@ -31,8 +31,6 @@ public class Path {
             //System.out.println(currentChar);
             if (currentChar == 'F') {
                 if (!fowardMove(Maze.rowLocation, Maze.colnLocation)) {
-                    //System.out.println("ERROR 1");
-                    return false;
                 }
             }
             if (currentChar == 'L') {
@@ -106,10 +104,8 @@ public class Path {
         }
         if (compass == 'E') {
             if (Maze.mazeStorage[row][colm+1] == 0) {
-                //System.out.println("FOWARD CHECK GOOD");
                 return true;}
         }
-        //System.out.println("FOWARD CHECK BAD");
         return false;
     }
 
