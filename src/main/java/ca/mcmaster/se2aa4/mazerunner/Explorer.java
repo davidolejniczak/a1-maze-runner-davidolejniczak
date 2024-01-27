@@ -4,11 +4,11 @@ public class Explorer {
 
     public static String pathFinder(String filepath) {
         StringBuilder pathWay = new StringBuilder();
-        System.out.println("Starting from West side of Maze");
+        System.out.println("Starting from West side of the Maze");
         Maze.mazeStartWest();
         while (Maze.rowLocation != Maze.eastEntry[0] || Maze.colnLocation != Maze.eastEntry[1]) {
             try {
-            System.out.println("top of while" + pathWay);
+            //System.out.println("top of while" + pathWay);
             if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced)) {
                 //open foward space only case
                 moveSpaceFoward();
@@ -19,6 +19,7 @@ public class Explorer {
                 pathWay.append("R");
             }if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced) == false && rightCheck(Maze.rowLocation, Maze.colnLocation) == false){
                 //foward and right wall blocked move
+                //once at the exit error comes from the foward check thus ending program
                 Compass.compassLeftMove();
                 pathWay.append("L");
             }if (deadEndCase()){
@@ -31,7 +32,7 @@ public class Explorer {
             } catch (Exception e) {
                 break;
             }
-            System.out.println(pathWay + " While end");
+            //System.out.println(pathWay + " While end");
             //System.out.print(Maze.rowLocation);
             //System.out.println(Maze.colnLocation);
         }

@@ -1,7 +1,6 @@
 package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 
 public class Path {
-    // make a path check functoin that first checks from west size then from east side entry
     public static boolean userCheck(String currentPath) {
         try {
             Maze.mazeStartWest();

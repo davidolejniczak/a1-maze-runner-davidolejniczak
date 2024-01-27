@@ -28,7 +28,7 @@ public class Main {
             if ("-p".equals(args[2])) {
                 String userPath = Print.pathCanonicalMaker(args[3]);
                 //userPath = "FFFFFLLFFRFFRFFLLFFRFFRFFF"; //error in args inputting arguments     FRFFLFFRFFLFFFFLFFFFFFRFFLFRF
-                System.out.println(userPath);
+                //System.out.println(userPath);
                 boolean result = Path.userCheck(userPath);
                 Print.pathResult(result);
             }
@@ -40,7 +40,7 @@ public class Main {
             if (argsP == 1) {
                 logger.info("**** Computing path");
                 String solvedPath = Explorer.pathFinder(args[1]);
-                System.out.println("MAIN " + solvedPath);
+                //System.out.println("MAIN " + solvedPath);
                 solvedPath = Print.pathFactorized(solvedPath);
                 Print.printPath(solvedPath);
             }
