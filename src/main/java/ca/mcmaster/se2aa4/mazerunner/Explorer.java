@@ -2,7 +2,7 @@ package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 
 public class Explorer {
 
-    public static String pathFinder(String filepath) {
+    public static String pathFinder() {
         StringBuilder pathWay = new StringBuilder();
         System.out.println("Starting from West side of the Maze");
         Maze.mazeStartWest();
