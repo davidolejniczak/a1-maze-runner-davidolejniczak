@@ -25,37 +25,65 @@ public class Main {
     private static String userPathComp;
 
     public static void main(String[] args) {
-        CommandLineParser parser = new DefaultParser();
-        Options options = new Options();
-        options.addOption("i", "input", true, "Getting input file");
-        options.addOption("p", "path", true, "Getting user given path");
+        logger.info("Start of MazeRunner");
         try {
-            CommandLine cmd = parser.parse(options, args);
-            if (cmd.hasOption("i")) {
-                fileName = cmd.getOptionValue("i");
-                try {
-                    Maze.mazeMaker(fileName);
-                }catch (Exception e) {
-                    logger.error("\nMaze maker error\n");
-                    logger.error("Check maze file path");
-                    System.exit(1);
-                }
+            Configuration config = configure(args);
+            fileName = config.returnFileName();
+            userPath = config.returnUserPath();
+            try {
+                Maze.mazeMaker(fileName);
+                logger.info("Making Maze");
+            } catch (Exception e) {
+                logger.error("\nMaze maker error\n");
+                logger.error("Check maze file path");
+                System.exit(1);
             }
-            if (cmd.hasOption("p")) {
-                userPath = cmd.getOptionValue("p");
-                //System.out.println(userPath);
+            if (config.returnPathGiven()) {
+                logger.info("Checking user path");
                 userPathComp = Print.pathCanonicalMaker(userPath);
-                //System.out.println(userPathComp);
                 boolean result = Path.userCheck(userPathComp);
                 Print.pathResult(result);
             } else {
+                logger.info("Solving for path");
                 String solvedPath = Explorer.pathFinder();
                 solvedPath = Print.pathFactorized(solvedPath);
                 Print.printPath(solvedPath);
             }
         } catch (Exception e) {
             logger.error("\nMajor Error has occured\n Check your command line input");
+            e.printStackTrace();
+            System.exit(1);
         }
+        logger.info("End of MazeRunner");
     }
+        private static class Configuration {
+            private final boolean PathGiven;
+            private final String FileName;
+            private final String UserPath;
+            public Configuration(String FileName, String UserPath, boolean PathGiven) {
+                this.PathGiven = PathGiven;
+                this.FileName = FileName;
+                this.UserPath = UserPath;
+            }
+            public boolean returnPathGiven() {
+                return PathGiven;
+            }
+            public String returnFileName() {
+                return FileName;
+            }
+            public String returnUserPath() {
+                return UserPath;
+            }
+        }
+        private static Configuration configure(String[] args) throws ParseException {
+            Options options = new Options();
+            options.addOption("i", "input", true, "Input File path");
+            options.addOption("p", "path", true, "Input User Path ");
+            CommandLineParser parser = new DefaultParser();
+            CommandLine cmd = parser.parse(options, args);
+            String FileName = cmd.getOptionValue("i");
+            String UserPath = cmd.getOptionValue("p");
+            return new Configuration(FileName, UserPath, cmd.hasOption("p"));
+        }
 }
 
