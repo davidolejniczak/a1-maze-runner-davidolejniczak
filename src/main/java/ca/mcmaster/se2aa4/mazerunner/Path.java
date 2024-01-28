@@ -9,74 +9,51 @@ public class Path {
                 return true;
             }
             Maze.mazeStartEast();
-            //printLoc();
-            //System.out.println("PRINT LOC 1");
             if (pathCheck(currentPath)) {
                 System.out.println("Starting on the East side ");
                 return true;
             }
-        } catch (Exception e) {System.out.println("Given path is incorrect by having too many moves");}
+        } catch (Exception e) {
+            System.out.println("Given path is incorrect by having too many moves");
+        }
         return false;
     }
-    //5F2L2FR2FR2F2L2FR2FR3F
     private static boolean pathCheck(String userpath) {
         if (userpath.isEmpty()) {return false;}
-        //System.out.println(userpath + " STRING BEING READ");
-        // re do this so that osmeone can spin around in one spot and it wont die on them
-        // so it doesn't crash when someone just hits a wall
         char currentChar;
         int charCount = 0;
         while (charCount < userpath.length()) {
-            //System.out.println("printloc 1");
             currentChar = userpath.charAt(charCount);
-            //System.out.println(currentChar);
-            //System.out.println("TF PRINT");
             if (currentChar == 'F') {
-                fowardMove(Maze.rowLocation, Maze.colnLocation);
+                if (fowardMove(Maze.rowLocation, Maze.colnLocation) == false) {
+                    return false;
+                }
             }
             if (currentChar == 'L') {
-                //System.out.println("LEFT HAND TURN");
                 leftMove();
             }
             if (currentChar == 'R') {
-                //System.out.println("RIGHT HAND TURN");
                 rightMove();
             }
-            charCount++;  
-            //PrintLoc();
-            //System.out.println("printloc 2");
-            // FR2FL3FRFLFRFL2F
-
+            charCount++;
         }
         char userpathLastChar = userpath.charAt(userpath.length()-1);
-        //System.out.println(userpathLastChar);
         if (userpathLastChar == 'F' || userpathLastChar == 'R' || userpathLastChar == 'L') {
             if (endCondition()) {
-                //System.out.println("ADF");
                 return true;
             }
-            //System.out.println("Other characters at the end of the path 1");
             return false;
         }
-        //System.out.println("ERROR END 2");
         return false;
-    }
-
-    private static void printLoc() {
-        System.out.print(Maze.rowLocation);
-        System.out.println(Maze.colnLocation);
     }
 
     private static boolean endCondition(){
-        //System.out.println("END CONDITION CHECK");
-        if (Maze.rowLocation == Maze.eastEntry[0] && Maze.colnLocation == Maze.eastEntry[1]) {return true;}
-        if (Maze.rowLocation == Maze.westEntry[0] && Maze.colnLocation == Maze.westEntry[1]) {return true;}
+        if (Maze.rowLocation == Maze.eastEntry[0] && Maze.colnLocation == Maze.eastEntry[1] && Maze.startSide == 'W') {return true;}
+        if (Maze.rowLocation == Maze.westEntry[0] && Maze.colnLocation == Maze.westEntry[1] && Maze.startSide == 'E') {return true;}
         return false;
     }
     private static void rightMove() {
-            //System.out.println(Compass.directionFaced + " DIRECTINON FACED 1 ");
             Compass.compassRightMove();
-            //System.out.println(Compass.directionFaced + " DIRECTINON FACED 2 ");
     }
     private static void leftMove() {
             Compass.compassLeftMove();
@@ -96,11 +73,8 @@ public class Path {
             if (Compass.directionFaced == 'E') {
                 Maze.colnLocation = Maze.colnLocation + 1;
             }
-            //System.out.println("FOWARD MOVE GOOD 2.2");
-            //Maze.updateLocation();
             return true;
         }
-        //System.out.println("ERROR 2");
         return false;
     }
 
@@ -120,6 +94,5 @@ public class Path {
         }
         return false;
     }
-
 }
 

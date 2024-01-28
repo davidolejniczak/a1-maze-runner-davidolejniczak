@@ -8,36 +8,27 @@ public class Explorer {
         Maze.mazeStartWest();
         while (Maze.rowLocation != Maze.eastEntry[0] || Maze.colnLocation != Maze.eastEntry[1]) {
             try {
-            //System.out.println("top of while" + pathWay);
             if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced)) {
-                //open foward space only case
+                //open foward space move
                 moveSpaceFoward();
                 pathWay.append("F");
-            }if (rightCheck(Maze.rowLocation, Maze.colnLocation)) {
-                //open right path case
+            }if (rightCheck(Maze.rowLocation, Maze.colnLocation)) {//right hand side open move
                 Compass.compassRightMove();
                 pathWay.append("R");
             }if (Path.fowardCheck(Maze.rowLocation, Maze.colnLocation, Compass.directionFaced) == false && rightCheck(Maze.rowLocation, Maze.colnLocation) == false){
                 //foward and right wall blocked move
-                //once at the exit error comes from the foward check thus ending program
                 Compass.compassLeftMove();
                 pathWay.append("L");
             }if (deadEndCase()){
-                //dead end case
                 Compass.compassLeftMove();
                 pathWay.append("L");
                 Compass.compassLeftMove();
                 pathWay.append("L");
             }
-            } catch (Exception e) {
+            } catch (Exception e) { //once at the exit error comes from the foward check thus ending program
                 break;
             }
-            //System.out.println(pathWay + " While end");
-            //System.out.print(Maze.rowLocation);
-            //System.out.println(Maze.colnLocation);
         }
-        //System.out.println("Error 1");
-        //pathWay.append("F");
         return pathWay.toString();
     }
 
@@ -97,10 +88,6 @@ public class Explorer {
             } else if (Compass.directionFaced == 'E') {
                 Maze.colnLocation = Maze.colnLocation + 1;
             }
-            //System.out.println("FOWARD MOVE GOOD 2.2");
-            //Maze.updateLocation();
         }
-        //System.out.println("ERROR 2 Bad");
     }
-
 }

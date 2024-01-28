@@ -1,9 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 import org.apache.commons.cli.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.CommandLine;
@@ -50,9 +46,10 @@ public class Main {
                 Print.printPath(solvedPath);
             }
         } catch (Exception e) {
-            logger.error("\nMajor Error has occured\n Check your command line input");
+            System.out.println("Incorrect Path");
+            logger.error("\n Non number or letter in path\n Check your command line input");
             e.printStackTrace();
-            System.exit(1);
+            System.exit(0);
         }
         logger.info("End of MazeRunner");
     }
