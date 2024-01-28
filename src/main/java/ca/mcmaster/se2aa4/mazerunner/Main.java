@@ -17,10 +17,12 @@ import src.main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
 import src.main.java.ca.mcmaster.se2aa4.mazerunner.Path;
 import src.main.java.ca.mcmaster.se2aa4.mazerunner.Print;
 
+
 public class Main {
     private static final Logger logger = LogManager.getLogger();
     private static String fileName;
     private static String userPath;
+    private static String userPathComp;
 
     public static void main(String[] args) {
         CommandLineParser parser = new DefaultParser();
@@ -34,14 +36,16 @@ public class Main {
                 try {
                     Maze.mazeMaker(fileName);
                 }catch (Exception e) {
-                    logger.error("Maze maker error\n");
+                    logger.error("\nMaze maker error\n");
                     logger.error("Check maze file path");
                     System.exit(1);
                 }
             }
             if (cmd.hasOption("p")) {
                 userPath = cmd.getOptionValue("p");
-                String userPathComp = Print.pathCanonicalMaker(userPath);
+                //System.out.println(userPath);
+                userPathComp = Print.pathCanonicalMaker(userPath);
+                //System.out.println(userPathComp);
                 boolean result = Path.userCheck(userPathComp);
                 Print.pathResult(result);
             } else {
@@ -49,11 +53,9 @@ public class Main {
                 solvedPath = Print.pathFactorized(solvedPath);
                 Print.printPath(solvedPath);
             }
-
         } catch (Exception e) {
-            logger.error("Major Error has occured");
+            logger.error("\nMajor Error has occured\n Check your command line input");
         }
     }
 }
-
 

@@ -18,20 +18,21 @@ public class Path {
         } catch (Exception e) {System.out.println("Given path is incorrect by having too many moves");}
         return false;
     }
+    //5F2L2FR2FR2F2L2FR2FR3F
     private static boolean pathCheck(String userpath) {
-        //System.out.println(userpath + "STRING BEING READ");
+        if (userpath.isEmpty()) {return false;}
+        //System.out.println(userpath + " STRING BEING READ");
         // re do this so that osmeone can spin around in one spot and it wont die on them
         // so it doesn't crash when someone just hits a wall
         char currentChar;
         int charCount = 0;
         while (charCount < userpath.length()) {
-            //printLoc();
             //System.out.println("printloc 1");
             currentChar = userpath.charAt(charCount);
             //System.out.println(currentChar);
+            //System.out.println("TF PRINT");
             if (currentChar == 'F') {
-                if (!fowardMove(Maze.rowLocation, Maze.colnLocation)) {
-                }
+                fowardMove(Maze.rowLocation, Maze.colnLocation);
             }
             if (currentChar == 'L') {
                 //System.out.println("LEFT HAND TURN");
@@ -44,10 +45,20 @@ public class Path {
             charCount++;  
             //PrintLoc();
             //System.out.println("printloc 2");
+            // FR2FL3FRFLFRFL2F
+
         }
-        if (endCondition()) {
-            return true;
+        char userpathLastChar = userpath.charAt(userpath.length()-1);
+        //System.out.println(userpathLastChar);
+        if (userpathLastChar == 'F' || userpathLastChar == 'R' || userpathLastChar == 'L') {
+            if (endCondition()) {
+                //System.out.println("ADF");
+                return true;
+            }
+            //System.out.println("Other characters at the end of the path 1");
+            return false;
         }
+        //System.out.println("ERROR END 2");
         return false;
     }
 
@@ -57,6 +68,7 @@ public class Path {
     }
 
     private static boolean endCondition(){
+        //System.out.println("END CONDITION CHECK");
         if (Maze.rowLocation == Maze.eastEntry[0] && Maze.colnLocation == Maze.eastEntry[1]) {return true;}
         if (Maze.rowLocation == Maze.westEntry[0] && Maze.colnLocation == Maze.westEntry[1]) {return true;}
         return false;

@@ -2,14 +2,13 @@ package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Serial;
 
 public class Maze {
     public static int rowLocation;
     public static int colnLocation;
     //public static int currentLocation[] = new int[2]; // maybe delete if not used anywhere
-    static int westEntry[] = new int[2];
-    static int eastEntry[] = new int[2];
+    public static int westEntry[] = new int[2];
+    public static int eastEntry[] = new int[2];
     public static int[][] mazeStorage;
     public static void mazeMaker(String filename) throws IOException {
         BufferedReader readerCount = new BufferedReader(new FileReader(filename));
